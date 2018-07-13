@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--
+    NOTE:
+    1. You can reference the file in SDK via relative path
+    2. The Control and Widget Should NOT share resources. Only the Widget folder will make it to the device
+    3. You may include any JS framework you want with your Widget and Control folders. However, keep in mind
+        to keep you plugin as light weight as possible for performance and transport reasons
+  -->
+
+  <!-- You can load helper.css to use our helper classes.
+  <link href="../../../../styles/helper.css" rel="stylesheet">
+  -->
+
+  <!-- JS -->
+  <script src="../../../../scripts/jquery/jquery-1.11.2.min.js"></script>
+  <script src="../../../../scripts/buildfire.js"></script>
+  <script src="../../../../scripts/sortable.min.js"></script>
+  <script src="../../../../scripts/buildfire/components/carousel/carousel.js"></script>
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <link rel="stylesheet" href="controlwidget.css">
+</head>
+
+<body>
+  <div class="form-group">
+    <label for="name">Company Name</label>
+    <input text="text" class="form-control" id="name" placeholder="BuildFire inc.">
+    </br>
+    <label for="slogan">Company Slogan</label>
+    <input text="text" class="form-control" id="slogan" placeholder="The Most Powerful Mobile App Builder for iOS & Android">
+    </br>
+    <label for="logo">Upload Logo</label>
+    </br>
+    <label class="switch">
+    <input id="chkSwitchLogo" type="checkbox" checked>
+    <span class="slider round"></span>
+    </label>
+    <div id="image_holder" class="image_holder" style="width: 100%; height: 100%;">
+      <span id="deletekeylogo" class="glyphicon glyphicon-remove btn-sm btn-danger" style="cursor: pointer; position: relative; border-radius: 50%; padding: 5px;"></span>
+      <div id="logobox" style="cursor: pointer;border: 2px solid black; position:relative; background-color: gray; width: 155px; height: 155px; background-size: cover; border-radius: 50%; margin-left: 125px; margin-top: 4px;">
+        <img id="logobox_img" src="" style="width: 150px; height: 150px;border-radius: 50%;">
+      </div>
+    </div>
+    </br>
+    </br>
+    <label for='backgroundcolor'>Screen Background</label>
+    </br>
+    <div class="image_holder2" style="width: 100%; height: 100%;">
+      <span id="deletekeybg" class="glyphicon glyphicon-remove btn-sm btn-danger" style="cursor: pointer; position: relative; border-radius: 50%; padding: 5px;"></span>
+      </br>
+      <div id="dvShowSelectedColorBar" style="cursor: pointer; border: 1px solid black; width: 50px; height: 50px; border-radius: 50%; margin-left: 6px; margin-top: -20px;"></div>
+    </div>
+  </div>
+  <label for="transparent">Transparent Menu</label>
+  </br>
+  <label class="switch">
+<input id="transparent" type="checkbox" checked>
+<span class="slider round"></span>
+</label>
+  </br>
+  <label for="colors">Rings</label>
+  </br>
+  <label class="switch">
+<input id="chkSwitchRings" type="checkbox" checked>
+<span class="slider round"></span>
+</label>
+  <div id='ringArea' class="ringArea" style="display: flex; justify-content: space-between">
+    <div id="ringbox0" style="z-index: 10; float: right; cursor: pointer; border: 1px solid black; width:40px; height: 40px; border-radius: 50%; ">
+      <span id="deletekeyring0" class="glyphicon glyphicon-remove btn-sm btn-danger deletering" index= "0" style="z-index: 900; cursor: pointer; position: relative; border-radius: 50%; padding: 5px;"></span>
+      <div id="ringbox0ColorPopup" style="width:100%;height:100%; margin-top: -40px;"></div>
+    </div>
+    </br>
+    <div id="ringbox1" style="z-index: 10; float: right; cursor: pointer; border: 1px solid black; width:40px; height: 40px; border-radius: 50%;">
+      <span id="deletekeyring1" class="glyphicon glyphicon-remove btn-sm btn-danger deletering" index= "1" style="z-index: 900; cursor: pointer; position: relative;border-radius: 50%; padding: 5px;"></span>
+      <div id="ringbox1ColorPopup" style="width:100%;height:100%;margin-top: -40px;"></div>
+    </div>
+    </br>
+    <div id="ringbox2" style="z-index: 10; float: right; cursor: pointer; border: 1px solid black; width:40px; height: 40px; border-radius: 50%; ">
+      <span id="deletekeyring2" class="glyphicon glyphicon-remove btn-sm btn-danger deletering" index= "2" style="z-index: 900; cursor: pointer; position: relative; border-radius: 50%; padding: 5px;"></span>
+      <div id="ringbox2ColorPopup" style="width:100%;height:100%; margin-top: -40px;"></div>
+    </div>
+    </br>
+    <div id="ringbox3" style="z-index: 10; float: right; cursor: pointer; border: 1px solid black; width:40px; height: 40px; border-radius: 50%; ">
+      <span id="deletekeyring3" class="glyphicon glyphicon-remove btn-sm btn-danger deletering" index= "3" style="z-index: 900; cursor: pointer; position: relative; border-radius: 50%; padding: 5px;"></span>
+      <div id="ringbox3ColorPopup" style="width:100%;height:100%;margin-top: -40px;"></div>
+    </div>
+    </br>
+    <div id="ringbox4" style="z-index: 10; float: right; cursor: pointer; border: 1px solid black; width:40px; height: 40px; border-radius: 50%;">
+      <span id="deletekeyring4" class="glyphicon glyphicon-remove btn-sm btn-danger deletering" index= "4" style="z-index: 900; cursor: pointer; position: relative; border-radius: 50%; padding: 5px;"></span>
+      <div id="ringbox4ColorPopup" style="width:100%;height:100%; margin-top: -40px;"></div>
+    </div>
+    </br>
+  </div>
+  </br>
+  <div id="carouselImages"></div>
+  </br>
+  <!--
+    Do not include the 'content.js' script tag!
+    Webpack will inject it automatically to this htmls body
+  -->
+</body>
+
+</html>

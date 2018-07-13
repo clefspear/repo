@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--
+		NOTE:
+		1. You can reference the file in SDK via relative path
+		2. The Control and Widget Should NOT share resources. Only the Widget folder will make it to the device
+		3. You may include any JS framework you want with your Widget and Control folders. However, keep in mind
+		    to keep you plugin as light weight as possible for performance and transport reasons
+	-->
+
+  <!-- You can load helper.css to use our helper classes.
+	<link href="../../../../styles/helper.css" rel="stylesheet">
+	-->
+
+  <!-- JS -->
+  <script src="../../../scripts/buildfire.js"></script>
+  <link rel="stylesheet" href="widget.css">
+</head>
+
+<body>
+  <div id="border" class="border">
+    <div class="mainlogo coloredbar">
+      <button id="home" type="button" class="btn btn-primary btn-lg">
+        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style= "color: white !important;">
+        </span>
+      </button>
+      <div id="title" class="title">
+      </br>
+        <h1 id="name" style="font-family: Open Sans; color: black"></h1>
+        <h3 id="slogan" style="font-family: Open Sans; color: black"></h3>
+      </div>
+      <div id="ringborder" class="ringborder">
+        <div id="ring gray1" class="ring gray1"></div>
+        <div id="ring gray2" class="ring gray2"></div>
+        <div id="ring gray3" class="ring gray3"></div>
+        <div id="ring gray4" class="ring gray4"></div>
+        <div id="ring gray5" class="ring gray5"></div>
+        <img id="logo" class="logo"/>
+    </div>
+    <div id="container" class="container">
+    </div>
+  </div>
+</div>
+    <!-- <div style= "width: 150px; height: 150px; background-color: teal; border-radius: 50%; margin-left: auto; margin-right: auto;" >
+</div>
+  <!--
+    Do not include the 'widget.js' script tag!
+    Webpack will inject it automatically to this html's body
+  -->
+</body>
+
+</html>
