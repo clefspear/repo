@@ -10,40 +10,57 @@ var coloredbar;
 var rings = {};
 var ringbox = {};
 
+var start = Date.now();
+
+
+let tmr = null;
+
 function save() {
-  buildfire.datastore.save({
-    name: document.getElementById("name").value,
-    slogan: document.getElementById("slogan").value,
-    colors: colorRings,
-    logo: mylogo,
-    backgroundcolor: coloredbar,
-    carouselItems: editor.items,
-    showLogo: document.getElementById('chkSwitchLogo').checked,
-    showRings: document.getElementById('chkSwitchRings').checked,
-    showopacity: document.getElementById('transparent').checked
-  }, function (err, result) {
-    if (err)
-      console.error(err);
-    else
-      console.log("saved");
-    load();
-  });
+
+  if (!tmr) {
+    tmr = setTimeout(() => {
+      buildfire.datastore.save({
+        name: document.getElementById("name").value,
+        slogan: document.getElementById("slogan").value,
+        colors: colorRings,
+        logo: mylogo,
+        backgroundcolor: coloredbar,
+        carouselItems: editor.items,
+        showLogo: document.getElementById('chkSwitchLogo').checked,
+        showRings: document.getElementById('chkSwitchRings').checked,
+        showopacity: document.getElementById('transparent').checked
+      }, function (err, result) {
+        if (err)
+          console.error(err);
+        else
+          console.log("saved");
+        // load();
+      });
+      tmr = null;
+    }, 500);
+  }
+  
+  
+
+  
 }
 
-function imageupload(){
-document.getElementById('logobox').onclick = function () {
+function imageupload() {
+  document.getElementById('logobox').onclick = function () {
 
-  var options = {multiSelection: false };
-	var callback=function(error,result){
-    if(result && result.selectedFiles && result.selectedFiles[0]){
-      document.getElementById('logobox_img').src = result.selectedFiles[0];
-      mylogo = result.selectedFiles[0];
-      save();
-    }
-	};
+    var options = {
+      multiSelection: false
+    };
+    var callback = function (error, result) {
+      if (result && result.selectedFiles && result.selectedFiles[0]) {
+        document.getElementById('logobox_img').src = result.selectedFiles[0];
+        mylogo = result.selectedFiles[0];
+        save();
+      }
+    };
 
-	buildfire.imageLib.showDialog(options, callback);
-};
+    buildfire.imageLib.showDialog(options, callback);
+  };
 }
 imageupload();
 
@@ -69,7 +86,6 @@ function deleterings() {
       //debugger;
       let index = document.getElementById(e.target.id).getAttribute("index");
       console.log(colorRings);
-      console.log("it worked bruh");
       console.log(ringbox);
       colorRings[index] = null;
       save();
@@ -357,3 +373,18 @@ function autosavecarousel() {
   };
 }
 autosavecarousel();
+/*
+function debouncer() {
+ 
+
+  if (tmr) {
+    clearTimeout(tmr);
+    tmr = setTimeout(save(), 500);
+  } else {
+    buildfire.datastore.onUpdate();
+  }
+}
+debouncer();
+*/
+
+console.log("Page load took " + (Date.now() - start) + " milliseconds");
