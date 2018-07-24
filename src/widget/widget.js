@@ -68,19 +68,19 @@ mask.addEventListener("click", function () {
 
 });
 
-setTimeout(() => {
-  
+//setTimeout(() => {
+//document.querySelector("#ringContainer").style.display='none';
 ring_style.innerHTML =
   '.ring {width: ' + y + 'px;height: ' + y + 'px;border-radius: ' + (y) + '%;margin-top: -' + (verticalrings / 2) + 'px; top: 50%; margin-left: -' + (border_radius / 2) + 'px;left:50%;}';
-  document.head.appendChild(ring_style);
-}, 650);
+document.head.appendChild(ring_style);
+//}, 650);
 /**
  * Activate the menu
  */
 function activateMenu() {
   var opacity = 1;
   if ((typeof (currentData.showopacity) && currentData == 'undefined' || currentData.showopacity)) {
-    opacity = 0.8;
+    opacity = 0.7;
   }
   eleContainer.style.opacity = opacity;
 
@@ -376,22 +376,35 @@ function uploadimage(data) {
       height: logo_radius
 
     });
+    //document.getElementById("ringContainer").style.display = 'inline';
+  };
+
+  var _smallLogo = new Image();
+  _smallLogo.onload = function () {
+    document.getElementById("logo").src = buildfire.imageLib.cropImage(data.logo, {
+      width: 10,
+      height: 10
+    });
+
+    if (data.showLogo)
+      document.getElementById("logo").style.display = 'block';
+    else
+      document.getElementById("logo").style.display = 'none';
     document.getElementById("ringContainer").style.display = 'inline';
   };
+  _smallLogo.src = buildfire.imageLib.cropImage(data.logo, {
+    width: 10,
+    height: 10
+  });
+
   _image.src = buildfire.imageLib.cropImage(data.logo, {
     width: logo_radius,
     height: logo_radius
   });
-  document.getElementById("ringContainer").style.display = 'none';
-  document.getElementById("logo").src = buildfire.imageLib.cropImage(data.logo, {
-    width: 10,
-    height: 10
-  });
-  if (data.showLogo)
-    document.getElementById("logo").style.display = 'block';
-  else
-    document.getElementById("logo").style.display = 'none';
+
 }
+
+document.getElementById("ringContainer").style.display = 'none';
 
 buildfire.datastore.onUpdate(function (obj) {
   if (obj && obj.data) {
