@@ -67,6 +67,7 @@ mask.addEventListener("click", function () {
 
 
 });
+
 setTimeout(() => {
   
 ring_style.innerHTML =
