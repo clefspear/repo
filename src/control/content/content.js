@@ -87,13 +87,12 @@ function deleterings() {
       console.log(colorRings);
       console.log(ringbox);
       colorRings[index] = null;
-      document.getElementById('ringbox'+index).style.background = '';
+      document.getElementById('ringbox' + index).style.background = '';
       save();
       e.stopPropagation();
     };
 
   });
-
 }
 deleterings();
 
@@ -361,7 +360,13 @@ autosave();
 function autosavecarousel() {
   // this method will be called when a new item added to the list
   editor.onAddItems = function (items) {
+
     save(editor.items);
+
+    var alllinks = document.querySelectorAll("#carouselImages .d-item a");
+    for (var i = editor.items.length - 1; i < editor.items.length; i--) {
+      alllinks[i].click();
+    }
   };
   // this method will be called when an item deleted from the list
   editor.onDeleteItem = function (item, index) {
@@ -377,5 +382,9 @@ function autosavecarousel() {
   };
 }
 autosavecarousel();
+
+// var imagemenu = document.querySelector('#carouselImages .btn.btn-success.pull-left.add-new-carousel');
+// console.log(imagemenu);
+// imagemenu.onclick(buildfire.actionItems.showDialog({}, {showIcons: true}, (e, r) => {window.r = r;}));
 
 console.log("Page load took " + (Date.now() - start) + " milliseconds");
