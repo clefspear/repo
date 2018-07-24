@@ -22,17 +22,20 @@
   <script src="../../../../scripts/buildfire/components/carousel/carousel.js"></script>
   <link rel="stylesheet" href="bootstrap.min.css">
   <link rel="stylesheet" href="controlwidget.css">
+  <link href="../../../../styles/helper.css" rel="stylesheet">
+  <link href="../../../../styles/siteIcons.css" rel="stylesheet">
+
 </head>
 
 <body>
   <div class="form-group">
-    <label for="name">Company Name</label>
-    <input text="text" maxlength="25" class="form-control" id="name" placeholder="BuildFire inc.">
+    <p for="name">Header</p>
+    <input text="text" maxlength="25" class="form-control" id="name" placeholder="Enter Text Here">
     </br>
-    <label for="slogan">Company Slogan</label>
-    <input text="text" maxlength="25" class="form-control" id="slogan" placeholder="The Most Powerful Mobile App Builder for iOS & Android">
+    <p for="slogan">Subheader</p>
+    <input text="text" class="form-control" id="slogan" placeholder="Enter Text Here">
     </br>
-    <label for="logo">Upload Logo</label>
+    <p for="logo">Upload Image</p>
     </br>
     <label class="switch">
     <input id="chkSwitchLogo" type="checkbox" checked>
@@ -46,7 +49,7 @@
     </div>
     </br>
     </br>
-    <label for='backgroundcolor'>Screen Background</label>
+    <p for='backgroundcolor'>Screen Background</p>
     </br>
     <div class="image_holder2" style="width: 100%; height: 100%;">
       <span id="deletekeybg" class="glyphicon glyphicon-remove btn-sm btn-danger" style="cursor: pointer; position: relative; border-radius: 50%; padding: 5px;"></span>
@@ -54,14 +57,14 @@
       <div id="dvShowSelectedColorBar" style="cursor: pointer; border: 1px solid black; width: 50px; height: 50px; border-radius: 50%; margin-left: 6px; margin-top: -20px;"></div>
     </div>
   </div>
-  <label for="transparent">Transparent Menu</label>
+  <p for="transparent">Transparent Menu</p>
   </br>
   <label class="switch">
 <input id="transparent" type="checkbox" checked>
 <span class="slider round"></span>
 </label>
   </br>
-  <label for="colors">Rings</label>
+  <p for="colors">Rings</p>
   </br>
   <label class="switch">
 <input id="chkSwitchRings" type="checkbox" checked>
@@ -95,7 +98,8 @@
     </br>
   </div>
   </br>
-  <div id="carouselImages"></div>
+  <div id="carouselImages">
+  </div>
   </br>
   <!--
     Do not include the 'content.js' script tag!

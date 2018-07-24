@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
  * Create mask
  */
 mask.classList.add("c-mask");
+
 document.body.appendChild(mask);
 
 setTimeout(activateMenu, 3500);
@@ -35,13 +36,11 @@ if (border_radius <= verticalrings) {
 } else {
   y = verticalrings;
 }
-ring_style.innerHTML =
-  '.ring {width: ' + y + 'px;height: ' + y + 'px;border-radius: ' + (y) + '%;margin-top: -' + (verticalrings / 2) + 'px; top: 50%; margin-left: -' + (border_radius / 2) + 'px;left:50%;}';
-document.head.appendChild(ring_style);
-
 
 var logo_radius = window.innerWidth / 1.4;
 var verticallogo = window.innerHeight / 1.4;
+
+
 var logo_style = document.createElement('style');
 var x;
 if (logo_radius <= verticallogo) {
@@ -65,27 +64,38 @@ document.head.appendChild(home_style);
 mask.addEventListener("click", function () {
   //deactivateMenu();
   console.log('click');
+
+
 });
 
+setTimeout(() => {
+  
+ring_style.innerHTML =
+  '.ring {width: ' + y + 'px;height: ' + y + 'px;border-radius: ' + (y) + '%;margin-top: -' + (verticalrings / 2) + 'px; top: 50%; margin-left: -' + (border_radius / 2) + 'px;left:50%;}';
+  document.head.appendChild(ring_style);
+}, 650);
 /**
  * Activate the menu
  */
 function activateMenu() {
-  if (!eleContainer) return;
-  console.log(eleContainer);
-
-  eleContainer.classList.add("container-active");
-
   var opacity = 1;
-  if (currentData && (typeof (currentData.showopacity) == 'undefined' || currentData.showopacity)) {
+  if ((typeof (currentData.showopacity) && currentData == 'undefined' || currentData.showopacity)) {
     opacity = 0.8;
   }
   eleContainer.style.opacity = opacity;
+
+  if (!eleContainer) return;
+  console.log(eleContainer);
+
 
   document.getElementById("name").style.visibility = 'hidden';
   document.getElementById("slogan").style.visibility = 'hidden';
   document.getElementById('home').style.display = 'inline';
   document.getElementById('home').style.zIndex = '1000';
+
+
+
+  eleContainer.classList.add("container-active");
 }
 
 /**
@@ -117,8 +127,10 @@ document.getElementById('border').addEventListener('click', function () {
 
 
 function updateNameSloganWelcome(data) {
-  document.getElementById('name').innerHTML = data.name;
-  document.getElementById('slogan').innerHTML = data.slogan;
+  if (data.name)
+    document.getElementById('name').innerHTML = data.name;
+  if (data.slogan)
+    document.getElementById('slogan').innerHTML = data.slogan;
 }
 
 function changebackground(data) {
@@ -136,112 +148,6 @@ function changebackground(data) {
   document.getElementsByClassName('coloredbar')[0].style.background = backgroundCSS;
 
   //document.getElementBy('coloredbar').innerHTML=data.coloredbar;
-}
-
-function changecolors(data) {
-  if (!data || !data.colors || data.colors.length < 0) {
-    return;
-  }
-  var x = document.getElementById('ring gray1');
-
-  if (data.colors[0] && data.colors[0].solid && data.colors[0].solid.color) {
-    x.style.borderColor = data.colors[0].solid.color;
-  } else {
-    x.style.borderColor = '';
-  }
-
-  if (!data || !data.colors || data.colors.length < 1) {
-    return;
-  }
-
-  var y = document.getElementById('ring gray2');
-
-  if (data.colors[1] && data.colors[1].solid && data.colors[1].solid.color) {
-    y.style.borderColor = data.colors[1].solid.color;
-  } else {
-    y.style.borderColor = '';
-  }
-
-  if (!data || !data.colors || data.colors.length < 2) {
-    return;
-  }
-
-  var z = document.getElementById('ring gray3');
-  if (data.colors[2] && data.colors[2].solid && data.colors[2].solid.color) {
-    z.style.borderColor = data.colors[2].solid.color;
-  } else {
-    z.style.borderColor = '';
-  }
-
-  if (!data || !data.colors || data.colors.length < 3) {
-    return;
-  }
-
-  var a = document.getElementById('ring gray4');
-
-  if (data.colors[3] && data.colors[3].solid && data.colors[3].solid.color) {
-    a.style.borderColor = data.colors[3].solid.color;
-  } else {
-    a.style.borderColor = '';
-  }
-
-  if (!data || !data.colors || data.colors.length < 4) {
-    return;
-  }
-
-  var b = document.getElementById('ring gray5');
-
-  if (data.colors[4] && data.colors[4].solid && data.colors[4].solid.color) {
-    b.style.borderColor = data.colors[4].solid.color;
-  } else {
-    b.style.borderColor = '';
-  }
-}
-
-function showLogo(data) {
-  if (data.showLogo) {
-    document.getElementById("logo").style.display = "inline";
-  } else {
-    document.getElementById("logo").style.display = "none";
-  }
-}
-
-if (logo) {
-  document.getElementById("logo").style.display = "inline";
-} else {
-  document.getElementById("logo").style.display = "none";
-}
-
-
-function showRings(data) {
-  if (data.showRings) {
-    document.getElementById("ring gray1").style.display = "inline";
-    document.getElementById("ring gray2").style.display = "inline";
-    document.getElementById("ring gray3").style.display = "inline";
-    document.getElementById("ring gray4").style.display = "inline";
-    document.getElementById("ring gray5").style.display = "inline";
-  } else {
-    document.getElementById("ring gray1").style.display = "none";
-    document.getElementById("ring gray2").style.display = "none";
-    document.getElementById("ring gray3").style.display = "none";
-    document.getElementById("ring gray4").style.display = "none";
-    document.getElementById("ring gray5").style.display = "none";
-  }
-}
-
-function uploadimage(data) {
-  var _image = new Image();
-  _image.onload = function (e) {
-    document.getElementById("logo").src = buildfire.imageLib.resizeImage(data.logo, {
-      width: 'full'
-    });
-    document.getElementById("ring").style.display = 'inline';
-  };
-  _image.src = buildfire.imageLib.resizeImage(data.logo, {
-    width: 'full'
-  });
-  document.getElementById("ring").style.display = 'none';
-  document.getElementById("logo").src = buildfire.imageLib.resizeImage(data.logo,{width:10});
 }
 
 function loadImages(data) {
@@ -286,6 +192,7 @@ function loadImages(data) {
       });
     }, 10);
   });
+
   /**
    * Darken the first gallery on scroll down
    * depends on IntersectionObserver being available
@@ -303,13 +210,13 @@ function loadImages(data) {
     let target = entries[0].target;
     let ratio = entries[0].intersectionRatio;
     if (ratio <= .80) {
-      if(target.querySelector('.overlay') && target.querySelector('.text')){
+      if (target.querySelector('.overlay') && target.querySelector('.text')) {
         target.querySelector('.overlay').style.opacity = .5;
         target.querySelector('.text').style.transform = ("scale(1)");
       }
     } else {
 
-      if(target.querySelector('.overlay') && target.querySelector('.text')){
+      if (target.querySelector('.overlay') && target.querySelector('.text')) {
         target.querySelector('.overlay').style.opacity = 0;
         target.querySelector('.text').style.transform = ("scale(2)");
       }
@@ -380,6 +287,112 @@ function loadImages(data) {
   _onload();
 }
 
+function showRings(data) {
+  if (data.showRings) {
+    document.getElementById("ring gray1").style.display = "inline";
+    document.getElementById("ring gray2").style.display = "inline";
+    document.getElementById("ring gray3").style.display = "inline";
+    document.getElementById("ring gray4").style.display = "inline";
+    document.getElementById("ring gray5").style.display = "inline";
+  } else {
+    document.getElementById("ring gray1").style.display = "none";
+    document.getElementById("ring gray2").style.display = "none";
+    document.getElementById("ring gray3").style.display = "none";
+    document.getElementById("ring gray4").style.display = "none";
+    document.getElementById("ring gray5").style.display = "none";
+  }
+}
+
+function changecolors(data) {
+  if (!data || !data.colors || data.colors.length < 0) {
+    return;
+  }
+  var x = document.getElementById('ring gray1');
+
+  if (data.colors[0] && data.colors[0].solid && data.colors[0].solid.color) {
+    x.style.borderColor = data.colors[0].solid.color;
+  } else {
+    x.style.borderColor = '';
+  }
+
+  if (!data || !data.colors || data.colors.length < 1) {
+    return;
+  }
+
+  var y = document.getElementById('ring gray2');
+
+  if (data.colors[1] && data.colors[1].solid && data.colors[1].solid.color) {
+    y.style.borderColor = data.colors[1].solid.color;
+  } else {
+    y.style.borderColor = '';
+  }
+
+  if (!data || !data.colors || data.colors.length < 2) {
+    return;
+  }
+
+  var z = document.getElementById('ring gray3');
+  if (data.colors[2] && data.colors[2].solid && data.colors[2].solid.color) {
+    z.style.borderColor = data.colors[2].solid.color;
+  } else {
+    z.style.borderColor = '';
+  }
+
+  if (!data || !data.colors || data.colors.length < 3) {
+    return;
+  }
+
+  var a = document.getElementById('ring gray4');
+
+  if (data.colors[3] && data.colors[3].solid && data.colors[3].solid.color) {
+    a.style.borderColor = data.colors[3].solid.color;
+  } else {
+    a.style.borderColor = '';
+  }
+
+  if (!data || !data.colors || data.colors.length < 4) {
+    return;
+  }
+
+  var b = document.getElementById('ring gray5');
+
+  if (data.colors[4] && data.colors[4].solid && data.colors[4].solid.color) {
+    b.style.borderColor = data.colors[4].solid.color;
+  } else {
+    b.style.borderColor = '';
+  }
+}
+
+function uploadimage(data) {
+  if (data && !data.logo) {
+    document.getElementById("logo").src = '';
+    document.getElementById("logo").style.display = 'none';
+    return;
+  }
+  var _image = new Image();
+  _image.onload = function (e) {
+    document.getElementById("logo").src = buildfire.imageLib.cropImage(data.logo, {
+      width: logo_radius,
+      height: logo_radius
+
+    });
+    document.getElementById("ringContainer").style.display = 'inline';
+  };
+  _image.src = buildfire.imageLib.cropImage(data.logo, {
+    width: logo_radius,
+    height: logo_radius
+  });
+  document.getElementById("ringContainer").style.display = 'none';
+  document.getElementById("logo").src = buildfire.imageLib.cropImage(data.logo, {
+    width: 10,
+    height: 10
+  });
+  if (data.showLogo)
+    document.getElementById("logo").style.display = 'block';
+  else
+    document.getElementById("logo").style.display = 'none';
+}
+
 buildfire.datastore.onUpdate(function (obj) {
   if (obj && obj.data) {
     currentData = obj.data;
@@ -388,7 +401,6 @@ buildfire.datastore.onUpdate(function (obj) {
     changecolors(obj.data);
     uploadimage(obj.data);
     changebackground(obj.data);
-    showLogo(obj.data);
     showRings(obj.data);
     deactivateMenu();
 
@@ -404,7 +416,6 @@ buildfire.datastore.get(function (err, obj) {
     changecolors(obj.data);
     uploadimage(obj.data);
     changebackground(obj.data);
-    showLogo(obj.data);
     showRings(obj.data);
   }
 });

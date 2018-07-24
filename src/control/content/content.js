@@ -12,7 +12,6 @@ var ringbox = {};
 
 var start = Date.now();
 
-
 let tmr = null;
 
 function save() {
@@ -39,10 +38,7 @@ function save() {
       tmr = null;
     }, 500);
   }
-  
-  
 
-  
 }
 
 function imageupload() {
@@ -54,6 +50,7 @@ function imageupload() {
     var callback = function (error, result) {
       if (result && result.selectedFiles && result.selectedFiles[0]) {
         document.getElementById('logobox_img').src = result.selectedFiles[0];
+        document.getElementById('logobox_img').style.display = 'block';
         mylogo = result.selectedFiles[0];
         save();
       }
@@ -67,6 +64,8 @@ imageupload();
 
 document.getElementById('deletekeylogo').onclick = function () {
   mylogo = null;
+  document.getElementById('logobox_img').style.display = 'none';
+  document.getElementById('logobox_img').src = null;
   save();
 };
 
@@ -88,6 +87,7 @@ function deleterings() {
       console.log(colorRings);
       console.log(ringbox);
       colorRings[index] = null;
+      document.getElementById('ringbox'+index).style.background = '';
       save();
       e.stopPropagation();
     };
@@ -150,6 +150,8 @@ function changering() {
 
   function ringboxonclick(index) {
     return function () {
+      if (!colorRings)
+        colorRings = [];
       var options = {
         hideGradient: true
       };
@@ -182,10 +184,13 @@ changering();
 
 /// create a new instance of the buildfire carousel editor
 editor = new buildfire.components.carousel.editor("#carouselImages");
+document.querySelector("#carouselImages span").innerHTML = "Image Gallery";
 /// handle the loading
 function loadImages(carouselItems) {
   // create an instance and pass it the items if you don't have items yet just pass []
   editor.loadItems(carouselItems);
+  var imageEditorContainer = document.querySelector('#carouselImages .pull-right.col-md-9');
+  imageEditorContainer.classList.replace("col-md-9", "col-md-12");
 }
 
 function load() {
@@ -318,7 +323,6 @@ function autosave() {
   document.getElementById("slogan").oninput = function () {
     save();
   };
-
   document.getElementById('chkSwitchLogo').oninput = function () {
     var value = document.getElementById('chkSwitchLogo').checked;
 
@@ -373,18 +377,5 @@ function autosavecarousel() {
   };
 }
 autosavecarousel();
-/*
-function debouncer() {
- 
-
-  if (tmr) {
-    clearTimeout(tmr);
-    tmr = setTimeout(save(), 500);
-  } else {
-    buildfire.datastore.onUpdate();
-  }
-}
-debouncer();
-*/
 
 console.log("Page load took " + (Date.now() - start) + " milliseconds");

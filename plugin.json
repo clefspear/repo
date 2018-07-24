@@ -1,7 +1,7 @@
 {
   "author":"Peter Azmy",
-  "pluginName": "Infinity Template",
-  "pluginDescription": "BuildFire plugin template for Webpack",
+  "pluginName": "Cascade Gallery",
+  "pluginDescription": "This plugin displays an image or logo surrounded by 5 customizable rings, followed by a smooth transition into a tailored gallery that will easily impress alone, or amplified with any other plugin used.",
   "supportEmail":"support@buildfire.com",
   "control": {
     "content":{

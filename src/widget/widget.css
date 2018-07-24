@@ -15,7 +15,7 @@
   width: 100vw;
   height: 100vh;
   border-style: transparent;
-  background-color: white;
+  background-color: whitesmoke;
   color: white;
   background-size: contain;
 }
@@ -27,7 +27,7 @@
   animation-timing-function: linear;
   z-index: -1;
   position: absolute;
-  display: inline;
+  display: none;
   z-index: 600;
 }
 
@@ -195,7 +195,7 @@ img {
 .container-active {
   margin-left: -15px;
   display: block;
-  width: 109%;
+  width: 110%;
   height: 100%;
   position: fixed;
   top: 0;
@@ -257,7 +257,7 @@ img {
 }
 
 .gallery .text {
-  font-size: 1.5em;
+  font-size: 1.2em;
 }
 
 .gallery-one {
@@ -280,6 +280,8 @@ img {
 .gallery-one .text {
   font-size: 2em;
   transform: scale(2);
+  padding: 74px;
+  text-align: center;
 }
 
 .gallery.grow {
@@ -303,6 +305,9 @@ img {
 .gallery.grow .text {
   transform: scaleY(.443);
   transform: scaleX(2);
+  padding: 90px;
+  text-align: center;
+  margin-top: -12px;
 }
 
 .filler {
@@ -364,6 +369,24 @@ img {
 @keyframes fadeout {
   0% {
     opacity: .8;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadefull {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeoutfull {
+  0% {
+    opacity: 1;
   }
   100% {
     opacity: 0;
