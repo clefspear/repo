@@ -116,20 +116,14 @@ input:checked+.slider:before {
   border-radius: 50%;
 }
 
-.btn.btn-success.pull-left.add-new-carousel {
-  margin-left: -150px;
-  margin-top: 22px;
-}
-
 .icon.glyphicon.glyphicon-remove.btn-danger {
   border-radius: 50%;
   height: 30px;
   width: 30px;
 }
 
-.main.col-md-9.pull-right{
+.main.col-md-9.pull-right {}
 
-}
 #deletekeylogo {
   margin-left: 289px;
   opacity: 0;
@@ -146,7 +140,6 @@ input:checked+.slider:before {
   opacity: 0;
   margin-left: 24px;
   top: -8px;
-  
 }
 
 #deletekeyring1 {
@@ -213,4 +206,24 @@ input:checked+.slider:before {
 
 #ringbox4:hover #deletekeyring4 {
   opacity: 1;
+}
+
+#ringbox0 {
+  background-color: #696969;
+}
+
+#ringbox1 {
+  background-color: #808080;
+}
+
+#ringbox2 {
+  background-color: #A9A9A9;
+}
+
+#ringbox3 {
+  background-color: #C0C0C0;
+}
+
+#ringbox4 {
+  background-color: #D3D3D3;
 }

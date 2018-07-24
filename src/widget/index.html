@@ -24,29 +24,31 @@
   <div id="border" class="border">
     <div class="mainlogo coloredbar">
       <button id="home" type="button" class="btn btn-primary btn-lg">
-        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style= "color: white !important;">
+        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true" style="color: white !important;">
         </span>
       </button>
       <div id="title" class="title">
-      </br>
+        </br>
         <h1 id="name" style="font-family: Open Sans; color: black; word-break: break-word"></h1>
-        <h3 id="slogan" style="font-family: Open Sans; color: black; word-break: break-word"></h3>
+        <h3 id="slogan" style="font-family: Open Sans; color: black; word-break: break-word; white-space: nowrap; overflow: hidden; text-overflow: ellipsis"></h3>
       </div>
       <div id="ringborder" class="ringborder">
-        <div id="ring gray1" class="ring gray1"></div>
-        <div id="ring gray2" class="ring gray2"></div>
-        <div id="ring gray3" class="ring gray3"></div>
-        <div id="ring gray4" class="ring gray4"></div>
-        <div id="ring gray5" class="ring gray5"></div>
-        <img id="logo" class="logo"/>
-    </div>
-    <div id="container" class="container">
+        <div id="ringContainer">
+          <div id="ring gray1" class="ring gray1"></div>
+          <div id="ring gray2" class="ring gray2"></div>
+          <div id="ring gray3" class="ring gray3"></div>
+          <div id="ring gray4" class="ring gray4"></div>
+          <div id="ring gray5" class="ring gray5"></div>
+        </div>
+        <img id="logo" class="logo" />
+      </div>
+      <div id="container" class="container">
+      </div>
     </div>
   </div>
+  <!-- <div style= "width: 150px; height: 150px; background-color: teal; border-radius: 50%; margin-left: auto; margin-right: auto;" >
 </div>
-    <!-- <div style= "width: 150px; height: 150px; background-color: teal; border-radius: 50%; margin-left: auto; margin-right: auto;" >
-</div>
-  <!--
+
     Do not include the 'widget.js' script tag!
     Webpack will inject it automatically to this html's body
   -->
