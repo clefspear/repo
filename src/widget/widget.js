@@ -78,12 +78,14 @@ document.head.appendChild(ring_style);
  * Activate the menu
  */
 function activateMenu() {
-  var opacity = 1;
-  if ((typeof (currentData.showopacity) && currentData == 'undefined' || currentData.showopacity)) {
-    opacity = 0.7;
-  }
-  eleContainer.style.opacity = opacity;
 
+  if ((typeof (currentData.showopacity) && currentData == 'undefined' || currentData.showopacity)) {
+    document.querySelector("#container").classList.remove("fadefull");
+    document.querySelector("#container").classList.add("fade");
+  } else {
+    document.querySelector("#container").classList.remove("fade");
+    document.querySelector("#container").classList.add("fadefull");
+  }
   if (!eleContainer) return;
   console.log(eleContainer);
 
@@ -190,7 +192,7 @@ function loadImages(data) {
       _image.src = buildfire.imageLib.resizeImage(currentImage.iconUrl, {
         width: 10
       });
-    }, 10);
+    }, 100);
   });
 
   /**
@@ -386,6 +388,11 @@ function uploadimage(data) {
       height: 10
     });
 
+    _image.src = buildfire.imageLib.cropImage(data.logo, {
+      width: logo_radius,
+      height: logo_radius
+    });
+
     if (data.showLogo)
       document.getElementById("logo").style.display = 'block';
     else
@@ -397,10 +404,6 @@ function uploadimage(data) {
     height: 10
   });
 
-  _image.src = buildfire.imageLib.cropImage(data.logo, {
-    width: logo_radius,
-    height: logo_radius
-  });
 
 }
 
