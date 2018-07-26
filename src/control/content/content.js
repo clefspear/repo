@@ -96,35 +96,6 @@ function deleterings() {
 }
 deleterings();
 
-/*
-document.getElementById('deletekeyring0').onclick = function () {
-  ringbox[0].onclick = null;
-  colorRings[0] = null;
-  save();
-};
-
-document.getElementById('deletekeyring1').onclick = function () {
-  ringbox[1].onclick = null;
-  colorRings[1] = null;
-  save();
-};
-document.getElementById('deletekeyring2').onclick = function () {
-  ringbox[2].onclick = null;
-  colorRings[2] = null;
-  save();
-};
-
-document.getElementById('deletekeyring3').onclick = function () {
-  ringbox[3].onclick = null;
-  colorRings[3] = null;
-  save();
-};
-document.getElementById('deletekeyring4').onclick = function () {
-  ringbox[4].onclick = null;
-  colorRings[4] = null;
-  save();
-};
-*/
 document.getElementById('dvShowSelectedColorBar').onclick = function (err, result) {
   buildfire.colorLib.showDialog(coloredbar, {}, function (err, result) {
     coloredbar = result;
