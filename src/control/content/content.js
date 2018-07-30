@@ -33,7 +33,6 @@ function save() {
           console.error(err);
         else
           console.log("saved");
-        // load();
       });
       tmr = null;
     }, 500);
@@ -353,9 +352,5 @@ function autosavecarousel() {
   };
 }
 autosavecarousel();
-
-// var imagemenu = document.querySelector('#carouselImages .btn.btn-success.pull-left.add-new-carousel');
-// console.log(imagemenu);
-// imagemenu.onclick(buildfire.actionItems.showDialog({}, {showIcons: true}, (e, r) => {window.r = r;}));
 
 console.log("Page load took " + (Date.now() - start) + " milliseconds");

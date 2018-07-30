@@ -176,20 +176,6 @@ input:checked+.slider:before {
 
 #ringbox0:hover #deletekeyring0 {
   opacity: 1;
-  /*
-  #deletekeyring1{
-    display:none;
-  }
-  #deletekeyring2{
-    display:none;
-  }
-  #deletekeyring3{
-    display:none;
-  }
-  #deletekeyring4{
-    display:none;
-  }
-  */
 }
 
 #ringbox1:hover #deletekeyring1 {
