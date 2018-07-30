@@ -378,7 +378,6 @@ function uploadimage(data) {
       height: logo_radius
 
     });
-    //document.getElementById("ringContainer").style.display = 'inline';
   };
 
   var _smallLogo = new Image();
