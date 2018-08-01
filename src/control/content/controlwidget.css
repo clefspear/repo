@@ -1,8 +1,9 @@
 .switch {
   position: relative;
-  display: inline-block;
+  display: block;
   width: 60px;
   height: 34px;
+  float: right;
 }
 
 .switch input {
@@ -122,8 +123,6 @@ input:checked+.slider:before {
   width: 30px;
 }
 
-.main.col-md-9.pull-right {}
-
 #deletekeylogo {
   margin-left: 289px;
   opacity: 0;
@@ -131,9 +130,9 @@ input:checked+.slider:before {
 }
 
 #deletekeybg {
-  margin-left: 59px;
+  margin-left: 49px;
   opacity: 0;
-  top: -1px;
+  top: 26px;
 }
 
 #deletekeyring0 {
@@ -212,4 +211,26 @@ input:checked+.slider:before {
 
 #ringbox4 {
   background-color: #D3D3D3;
+}
+
+.range{
+  margin-right: -430px;
+  width: 384px;
+  margin-left: 137px;
+  margin-top: -52px;
+  margin-bottom: 86px;
+}
+
+.input-group{
+  width: 48px;
+  height: 33px;
+  margin-left: 395px;
+  margin-top: -24px;
+}
+
+.input-group-addon{
+  margin-left: 40px;
+  margin-top: -34px;
+  height: 34px;
+  width: 34px;
 }

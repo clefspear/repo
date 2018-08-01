@@ -30,16 +30,21 @@
 <body>
   <div class="form-group">
     <p for="name">Header</p>
+    <hr class="margin-top-ten margin-bottom-ten">
     <input text="text" maxlength="25" class="form-control" id="name" placeholder="Enter Text Here">
     </br>
     <p for="slogan">Subheader</p>
+    <hr class="margin-top-ten margin-bottom-ten">
     <input text="text" class="form-control" id="slogan" placeholder="Enter Text Here">
     </br>
+    </br>
     <p for="logo">Upload Image</p>
-    <label class="switch">
+    <label class="switch" style="margin-top: -36px;">
       <input id="chkSwitchLogo" type="checkbox" checked>
       <span class="slider round"></span>
     </label>
+    <hr class="margin-top-ten margin-bottom-ten">
+
     <div id="image_holder" class="image_holder" style="width: 100%; height: 100%;">
       <span id="deletekeylogo" class="glyphicon glyphicon-remove btn-sm btn-danger" style="cursor: pointer; position: relative; border-radius: 50%; padding: 5px;"></span>
       <div id="logobox" style="cursor: pointer;border: 2px solid black; position:relative; background-color: gray; width: 155px; height: 155px; background-size: cover; border-radius: 50%; margin-left: 125px;">
@@ -47,20 +52,33 @@
       </div>
     </div>
     <p for='backgroundcolor'>Screen Background</p>
-    <div class="image_holder2" style="width: 100%; height: 100%;">
+    <hr class="margin-top-ten margin-bottom-ten">
+    <div class="image_holder2" style="width: 12%; height: 100%;">
       <span id="deletekeybg" class="glyphicon glyphicon-remove btn-sm btn-danger" style="cursor: pointer; position: relative; border-radius: 50%; padding: 5px;"></span>
-      </br>
-      <div id="dvShowSelectedColorBar" style="cursor: pointer; border: 1px solid black; width: 50px; height: 50px; border-radius: 50%; margin-left: 6px; margin-top: -20px;"></div>
+      <div id="dvShowSelectedColorBar" style="cursor: pointer; border: 1px solid black; width: 50px; height: 50px; border-radius: 50%; margin-left: 6px; margin-top: 25px;"></div>
+    </div>
+    <div style="margin-left: 69px; margin-top: -65px;">
+      <div class="screens col-md-3 clearfix">
+        <div class="screen wideicon pull-left text-center" style="width: 100%;line-height: normal;height: 100%">
+          <a id="backgroundupload" class="border-radius-three default-background-hover" style="width: 80px">
+            <span class="add-icon">+</span>
+            <img id="backgroundscreen" class="" src=""> </a>
+          <span id="deletekeybackground" class="icon btn-delete-icon btn-danger transition-third" style="top: -24px;"></span>
+          <div class="range">
+            <input id="range" class="opacityslider" type="range" step="1" min="0" max="100" value="100">
+            <div class="input-group sliderp">
+              <input type="number" id="number" class="form-control slidernumber" min="0" max="100" size="3" value="100">
+              <span class="input-group-addon" id="basic-addon2">%</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <p for="transparent">Transparent Menu</p>
-  <label class="switch">
-    <input id="transparent" type="checkbox" checked>
-    <span class="slider round"></span>
-  </label>
-  </br>
+  </div>
   <p for="colors">Rings</p>
-  <label class="switch">
+  <hr class="margin-top-ten margin-bottom-ten" style="margin-top: 11px !important;">
+  <label class="switch" style="margin-top: -51px;">
     <input id="chkSwitchRings" type="checkbox" checked>
     <span class="slider round"></span>
   </label>
@@ -90,6 +108,17 @@
       <div id="ringbox4ColorPopup" style="width:100%;height:100%; margin-top: -24px;"></div>
     </div>
     </br>
+  </div>
+  </br>
+  </br>
+  </br>
+  <p for="transparent">Transparent Menu</p>
+  <label class="switch" style="margin-top: -36px;">
+    <input id="transparent" type="checkbox" checked>
+    <span class="slider round"></span>
+  </label>
+  <hr class="margin-top-ten margin-bottom-ten" style="margin-top: 11px !important;">
+  <div class="menutoggle">
   </div>
   </br>
   <div id="carouselImages">
