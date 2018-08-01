@@ -343,7 +343,7 @@ img {
 */
 
 .gallery:not(:nth-last-child(2)).grow.darken .overlay {
-  opacity: .7;
+  opacity: .8;
 }
 
 .gallery:not(:nth-last-child(2)).grow.darken .text {
@@ -383,13 +383,13 @@ img {
     opacity: 0;
   }
   100% {
-    opacity: .7;
+    opacity: .8;
   }
 }
 
 @keyframes fadeout {
   0% {
-    opacity: .7;
+    opacity: .8;
   }
   100% {
     opacity: 0;
