@@ -13,10 +13,10 @@ buildfire.notifications.alert({
  * Cache variables
  */
 var mask = document.createElement("div");
+var defaultBackground = '';
 var eleContainer = null;
 var currentData = null;
 document.addEventListener("DOMContentLoaded", function (event) {
-  console.log("DOM fully loaded and parsed");
 });
 /**
  * Create mask
@@ -87,8 +87,6 @@ function activateMenu() {
     document.querySelector("#container").classList.add("fadefull");
   }
   if (!eleContainer) return;
-  console.log(eleContainer);
-
 
   document.getElementById("name").style.visibility = 'hidden';
   document.getElementById("slogan").style.visibility = 'hidden';
@@ -129,15 +127,25 @@ document.getElementById('border').addEventListener('click', function () {
 
 
 function updateNameSloganWelcome(data) {
-  if (data.name)
+
+  if (data.name) {
+    console.log(data.name);
     document.getElementById('name').innerHTML = data.name;
-  if (data.slogan)
+  }
+  if (data.slogan) {
+    console.log(data.slogan);
     document.getElementById('slogan').innerHTML = data.slogan;
+  }
 }
 
 function changebackground(data) {
   var backgroundCSS = '';
+
   if (!data.backgroundcolor) {
+    if (defaultBackground) {
+      document.getElementsByClassName('coloredbar')[0].style.background = defaultBackground;
+      return;
+    }
     document.getElementsByClassName('coloredbar')[0].style.background = null;
     return;
   }
@@ -365,6 +373,29 @@ function changecolors(data) {
   }
 }
 
+function uploadbacksplash(data) {
+  if (!data || !data.imagebg) {
+    document.getElementById("imagebg").src = '';
+    document.getElementById("imagebg").style.display = 'none';
+    return;
+  }
+  document.getElementById("imagebg").style.display = 'block';
+  var _image = new Image();
+  _image.onload = function (e) {
+    var options = {width: window.innerWidth,height: window.innerHeight}
+    document.getElementById("imagebg").src = buildfire.imageLib.cropImage(data.imagebg, options);
+  };
+  _image.src = buildfire.imageLib.cropImage(data.imagebg, {
+    width: window.innerWidth,
+    height: window.innerHeight
+  });
+}
+function opacitybg(data){
+  if(data && data.opacitynumber){
+    document.getElementById("imagebg").style.opacity =  parseInt(data.opacitynumber) / 100;
+  }
+
+}
 function uploadimage(data) {
   if (data && !data.logo) {
     document.getElementById("logo").src = '';
@@ -402,35 +433,42 @@ function uploadimage(data) {
     width: 10,
     height: 10
   });
-
-
 }
 
 document.getElementById("ringContainer").style.display = 'none';
 
 buildfire.datastore.onUpdate(function (obj) {
+  console.log(obj.data);
+
   if (obj && obj.data) {
     currentData = obj.data;
     loadImages(obj.data);
-    updateNameSloganWelcome(obj.data);
     changecolors(obj.data);
     uploadimage(obj.data);
+    uploadbacksplash(obj.data);
+    opacitybg(obj.data);
     changebackground(obj.data);
     showRings(obj.data);
     deactivateMenu();
-
+    updateNameSloganWelcome(obj.data);
   }
 });
 
-buildfire.datastore.get(function (err, obj) {
-  //debugger;
-  if (obj && obj.data) {
-    currentData = obj.data;
-    loadImages(obj.data);
-    updateNameSloganWelcome(obj.data);
-    changecolors(obj.data);
-    uploadimage(obj.data);
-    changebackground(obj.data);
-    showRings(obj.data);
+buildfire.appearance.getAppTheme(function (err, result) {
+  if (result && result.colors && result.colors.backgroundColor) {
+    defaultBackground = result.colors.backgroundColor;
   }
+  buildfire.datastore.get(function (err, obj) {
+    if (obj && obj.data) {
+      currentData = obj.data;
+      loadImages(obj.data);
+      updateNameSloganWelcome(obj.data);
+      changecolors(obj.data);
+      uploadimage(obj.data);
+      uploadbacksplash(obj.data);
+      opacitybg(obj.data);
+      changebackground(obj.data);
+      showRings(obj.data);
+    }
+  });
 });

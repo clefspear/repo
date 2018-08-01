@@ -6,9 +6,10 @@
 
 .title {
   text-align: center;
-  z-index: 1000;
+  z-index: 900;
   padding: 2vh;
   font-size: 30vh;
+  position: relative;
 }
 
 .slogan {
@@ -26,6 +27,17 @@
   background-color: whitesmoke;
   color: white;
   background-size: contain;
+  z-index: 5;
+}
+
+.imagebg {
+  width: 100vw;
+  height: 100vh;
+  border-style: transparent;
+  opacity: 1;
+  z-index: 6;
+  background-size: contain;
+  position: fixed;
 }
 
 .logo {
@@ -384,17 +396,18 @@ img {
   }
 }
 
-.fadefull{
+.fadefull {
   animation-name: fadefull;
   animation-duration: 1s;
   animation-fill-mode: forwards;
 }
 
-.fade{
+.fade {
   animation-name: fade;
   animation-duration: 1s;
   animation-fill-mode: forwards;
 }
+
 @keyframes fadefull {
   0% {
     opacity: 0;

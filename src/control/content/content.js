@@ -4,7 +4,8 @@
 // import Buildfire from 'buildfire';
 let buildfire = window.buildfire;
 var colorRings = [];
-var mylogo;
+var mylogo = '';
+var mybg = '';
 var editor;
 var coloredbar;
 var rings = {};
@@ -18,27 +19,83 @@ function save() {
 
   if (!tmr) {
     tmr = setTimeout(() => {
+     
       buildfire.datastore.save({
-        name: document.getElementById("name").value,
-        slogan: document.getElementById("slogan").value,
         colors: colorRings,
         logo: mylogo,
+        imagebg: mybg,
         backgroundcolor: coloredbar,
+        opacitynumber: document.querySelector("#number").value,
         carouselItems: editor.items,
         showLogo: document.getElementById('chkSwitchLogo').checked,
         showRings: document.getElementById('chkSwitchRings').checked,
-        showopacity: document.getElementById('transparent').checked
+        showopacity: document.getElementById('transparent').checked,
+        name: document.getElementById("name").value,
+        slogan: document.getElementById("slogan").value,
       }, function (err, result) {
         if (err)
           console.error(err);
         else
           console.log("saved");
-      });
-      tmr = null;
-    }, 500);
-  }
+        console.log(result);
 
+      });
+
+    }, 500);
+    tmr = null;
+  }
 }
+
+function sliderupdate() {
+  var value = document.querySelector("#number");
+  var slider = document.querySelector("#range");
+  value.oninput = function () {
+    if (this.value.length > 3) {
+      this.value = this.value.slice(0, 3);
+    }
+  };
+  slider.oninput = function (e) {
+    console.log(e);
+    slider.value = isNaN(parseInt(e.target.value, 10)) ? 0 : parseInt(e.target.value, 10);
+    value.value = isNaN(parseInt(e.target.value, 10)) ? 0 : parseInt(e.target.value, 10);
+    save();
+  };
+  value.oninput = function (e) {
+    console.log(e);
+    value.value = isNaN(parseInt(e.target.value, 10)) ? 0 : parseInt(e.target.value, 10);
+    slider.value= isNaN(parseInt(e.target.value, 10)) ? 0 : parseInt(e.target.value, 10);
+    save();
+  };
+  
+}
+sliderupdate();
+
+
+
+
+function backgroundupload() {
+  document.getElementById("backgroundupload").onclick = function () {
+
+    var options = {
+      multiSelection: false
+    };
+    var callback = function (error, result) {
+      if (result && result.selectedFiles && result.selectedFiles[0]) {
+        document.getElementById("backgroundscreen").src = buildfire.imageLib.cropImage(result.selectedFiles[0], {
+          width: 80,
+          height: 80
+        });
+        document.getElementById("backgroundscreen").style.display = 'block';
+        mybg = result.selectedFiles[0];
+        save();
+      }
+    };
+
+    buildfire.imageLib.showDialog(options, callback);
+  };
+}
+backgroundupload();
+
 
 function imageupload() {
   document.getElementById('logobox').onclick = function () {
@@ -61,6 +118,13 @@ function imageupload() {
 imageupload();
 
 
+document.getElementById("deletekeybackground").onclick = function () {
+  mybg = null;
+  document.getElementById("backgroundscreen").style.display = 'none';
+  document.getElementById("backgroundscreen").src = null;
+  save();
+};
+
 document.getElementById('deletekeylogo').onclick = function () {
   mylogo = null;
   document.getElementById('logobox_img').style.display = 'none';
@@ -77,14 +141,10 @@ document.getElementById('deletekeybg').onclick = function () {
 function deleterings() {
   let x = document.getElementsByClassName("deletering");
   var y = [].slice.call(x);
-  console.log(y);
   y.forEach(deletering => {
-    console.log(deletering);
     deletering.onclick = function (e) {
       //debugger;
       let index = document.getElementById(e.target.id).getAttribute("index");
-      console.log(colorRings);
-      console.log(ringbox);
       colorRings[index] = null;
       document.getElementById('ringbox' + index).style.background = '';
       save();
@@ -137,10 +197,7 @@ function changering() {
         }
         rings[index] = rings[index].replace("background:", "");
 
-        console.log(index);
-
         document.getElementById(`ringbox${index}`).style.background = rings[index];
-        console.log(rings);
         save();
       });
     };
@@ -160,6 +217,11 @@ function loadImages(carouselItems) {
   editor.loadItems(carouselItems);
   var imageEditorContainer = document.querySelector('#carouselImages .pull-right.col-md-9');
   imageEditorContainer.classList.replace("col-md-9", "col-md-12");
+
+  var addgallerybutton = document.querySelector('#carouselImages .btn.btn-success.pull-left.add-new-carousel');
+  addgallerybutton.classList.replace("btn-success", "btn-primary");
+
+  document.querySelector("#carouselImages .btn.btn-primary.pull-left.add-new-carousel").style = "margin-top: 10px";
 }
 
 function load() {
@@ -171,9 +233,12 @@ function load() {
       colorRings = obj.data.colors;
       coloredbar = obj.data.backgroundcolor;
       mylogo = obj.data.logo;
+      mybg = obj.data.imagebg;
       document.getElementById('chkSwitchLogo').checked = obj.data.showLogo;
       document.getElementById('chkSwitchRings').checked = obj.data.showRings;
       document.getElementById('transparent').checked = obj.data.showopacity;
+      document.querySelector("#number").value = obj.data.opacitynumber;
+      document.querySelector("#range").value = obj.data.opacityslider;
 
       if (obj.data.showRings) {
         document.getElementById('ringArea').style.display = "flex";
@@ -186,12 +251,30 @@ function load() {
         document.getElementById('image_holder').style.display = 'none';
       }
 
+      if (mybg) {
+        document.getElementById("backgroundscreen").src = buildfire.imageLib.cropImage(mybg, {
+          width: 80,
+          height: 80
+        });
+        document.getElementById("backgroundscreen").style.display = 'block';
+      } else {
+        document.getElementById("backgroundscreen").style.display = 'none';
+      }
 
       if (mylogo) {
         document.getElementById('logobox_img').src = mylogo;
         document.getElementById('logobox_img').style.display = 'block';
       } else {
         document.getElementById('logobox_img').style.display = 'none';
+      }
+      
+      if(obj.data.opacitynumber){
+        document.getElementById("number").value = obj.data.opacitynumber;
+        document.getElementById("range").value = obj.data.opacitynumber;
+      }
+      else{
+        document.getElementById("number").value = 100;
+        document.getElementById("range").value = 100;
       }
 
       if (obj.data.name || obj.data.slogan) {
