@@ -19,7 +19,7 @@ function save() {
 
   if (!tmr) {
     tmr = setTimeout(() => {
-     
+
       buildfire.datastore.save({
         colors: colorRings,
         logo: mylogo,
@@ -63,10 +63,10 @@ function sliderupdate() {
   value.oninput = function (e) {
     console.log(e);
     value.value = isNaN(parseInt(e.target.value, 10)) ? 0 : parseInt(e.target.value, 10);
-    slider.value= isNaN(parseInt(e.target.value, 10)) ? 0 : parseInt(e.target.value, 10);
+    slider.value = isNaN(parseInt(e.target.value, 10)) ? 0 : parseInt(e.target.value, 10);
     save();
   };
-  
+
 }
 sliderupdate();
 
@@ -77,7 +77,8 @@ function backgroundupload() {
   document.getElementById("backgroundupload").onclick = function () {
 
     var options = {
-      multiSelection: false
+      multiSelection: false,
+      showIcons: false
     };
     var callback = function (error, result) {
       if (result && result.selectedFiles && result.selectedFiles[0]) {
@@ -100,8 +101,9 @@ backgroundupload();
 function imageupload() {
   document.getElementById('logobox').onclick = function () {
 
-    var options = {
-      multiSelection: false
+    var options ={
+      multiSelection: false,
+      showIcons: false
     };
     var callback = function (error, result) {
       if (result && result.selectedFiles && result.selectedFiles[0]) {
@@ -210,18 +212,17 @@ changering();
 
 /// create a new instance of the buildfire carousel editor
 editor = new buildfire.components.carousel.editor("#carouselImages");
+var imageEditorContainer = document.querySelector('#carouselImages .pull-right.col-md-9');
+imageEditorContainer.classList.replace("col-md-9", "col-md-12");
+var addgallerybutton = document.querySelector('#carouselImages .btn.btn-success.pull-left.add-new-carousel');
+addgallerybutton.classList.replace("btn-success", "btn-primary");
+document.querySelector("#carouselImages .btn.btn-primary.pull-left.add-new-carousel").style = "margin-top: 10px";
 document.querySelector("#carouselImages span").innerHTML = "Image Gallery";
 /// handle the loading
 function loadImages(carouselItems) {
   // create an instance and pass it the items if you don't have items yet just pass []
   editor.loadItems(carouselItems);
-  var imageEditorContainer = document.querySelector('#carouselImages .pull-right.col-md-9');
-  imageEditorContainer.classList.replace("col-md-9", "col-md-12");
 
-  var addgallerybutton = document.querySelector('#carouselImages .btn.btn-success.pull-left.add-new-carousel');
-  addgallerybutton.classList.replace("btn-success", "btn-primary");
-
-  document.querySelector("#carouselImages .btn.btn-primary.pull-left.add-new-carousel").style = "margin-top: 10px";
 }
 
 function load() {
@@ -267,12 +268,11 @@ function load() {
       } else {
         document.getElementById('logobox_img').style.display = 'none';
       }
-      
-      if(obj.data.opacitynumber){
+
+      if (obj.data.opacitynumber) {
         document.getElementById("number").value = obj.data.opacitynumber;
         document.getElementById("range").value = obj.data.opacitynumber;
-      }
-      else{
+      } else {
         document.getElementById("number").value = 100;
         document.getElementById("range").value = 100;
       }
