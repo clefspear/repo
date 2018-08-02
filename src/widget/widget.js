@@ -16,8 +16,7 @@ var mask = document.createElement("div");
 var defaultBackground = '';
 var eleContainer = null;
 var currentData = null;
-document.addEventListener("DOMContentLoaded", function (event) {
-});
+document.addEventListener("DOMContentLoaded", function (event) {});
 /**
  * Create mask
  */
@@ -382,7 +381,10 @@ function uploadbacksplash(data) {
   document.getElementById("imagebg").style.display = 'block';
   var _image = new Image();
   _image.onload = function (e) {
-    var options = {width: window.innerWidth,height: window.innerHeight}
+    var options = {
+      width: window.innerWidth,
+      height: window.innerHeight
+    }
     document.getElementById("imagebg").src = buildfire.imageLib.cropImage(data.imagebg, options);
   };
   _image.src = buildfire.imageLib.cropImage(data.imagebg, {
@@ -390,12 +392,14 @@ function uploadbacksplash(data) {
     height: window.innerHeight
   });
 }
-function opacitybg(data){
-  if(data && data.opacitynumber){
-    document.getElementById("imagebg").style.opacity =  parseInt(data.opacitynumber) / 100;
+
+function opacitybg(data) {
+  if (data && data.opacitynumber) {
+    document.getElementById("imagebg").style.opacity = parseInt(data.opacitynumber) / 100;
   }
 
 }
+
 function uploadimage(data) {
   if (data && !data.logo) {
     document.getElementById("logo").src = '';
