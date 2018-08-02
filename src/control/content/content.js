@@ -415,10 +415,9 @@ function autosavecarousel() {
   editor.onAddItems = function (items) {
 
     save(editor.items);
-
     var alllinks = document.querySelectorAll("#carouselImages .d-item a");
-    for (var i = editor.items.length - 1; i < editor.items.length; i--) {
-      alllinks[i].click();
+    for (var i = items.length - 1; i > -1; i--) {
+      alllinks[i+(alllinks.length-items.length)].click();
     }
   };
   // this method will be called when an item deleted from the list
