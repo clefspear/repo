@@ -13,7 +13,6 @@
 }
 
 .slogan {
-  color: black;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -278,7 +277,7 @@ img {
 }
 
 .gallery .text {
-  font-size: 1em;
+  font-size: 2em;
 }
 
 .gallery-one {
