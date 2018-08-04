@@ -10,6 +10,8 @@ var editor;
 var coloredbar;
 var rings = {};
 var ringbox = {};
+var titleColor;
+var gallerycolor;
 
 var start = Date.now();
 
@@ -28,10 +30,14 @@ function save() {
         opacitynumber: document.querySelector("#number").value,
         carouselItems: editor.items,
         showLogo: document.getElementById('chkSwitchLogo').checked,
+        showbg: document.getElementById('chkSwitchbg').checked,
+        showtextcolor: document.getElementById('chkSwitchtextColor').checked,
         showRings: document.getElementById('chkSwitchRings').checked,
         showopacity: document.getElementById('transparent').checked,
         name: document.getElementById("name").value,
         slogan: document.getElementById("slogan").value,
+        titleColor: titleColor,
+        gallerycolor: gallerycolor
       }, function (err, result) {
         if (err)
           console.error(err);
@@ -101,7 +107,7 @@ backgroundupload();
 function imageupload() {
   document.getElementById('logobox').onclick = function () {
 
-    var options ={
+    var options = {
       multiSelection: false,
       showIcons: false
     };
@@ -157,6 +163,25 @@ function deleterings() {
 }
 deleterings();
 
+
+function deletetextcolor() {
+  document.getElementById("deletekeyhdr").onclick = function (err, result) {
+    titleColor = null;
+    document.getElementById('headerColor').style.background = '';
+    save();
+  };
+}
+deletetextcolor();
+
+function deletegallerycolor() {
+  document.getElementById("deletekeyglry").onclick = function (err, result) {
+    gallerycolor = null;
+    document.getElementById('gallerytextColor').style.background = '';
+    save();
+  };
+}
+deletegallerycolor();
+
 document.getElementById('dvShowSelectedColorBar').onclick = function (err, result) {
   buildfire.colorLib.showDialog(coloredbar, {}, function (err, result) {
     coloredbar = result;
@@ -175,6 +200,43 @@ document.getElementById('dvShowSelectedColorBar').onclick = function (err, resul
     save();
   });
 };
+
+document.getElementById("headerColor").onclick = function (err, result) {
+  buildfire.colorLib.showDialog(titleColor, {
+    hideGradient: true
+  }, function (err, result) {
+    titleColor = result;
+    save();
+  }, function (err, result) {
+    titleColor = result;
+
+    var main = '';
+    main = result.solid.backgroundCSS;
+    main = main.replace("background:", "");
+    document.getElementById('headerColor').style.background = main;
+    save();
+  });
+};
+
+document.getElementById("gallerytextColor").onclick = function (err, result) {
+  buildfire.colorLib.showDialog(gallerycolor, {
+    hideGradient: true
+  }, function (err, result) {
+    gallerycolor = result;
+    save();
+  }, function (err, result) {
+    gallerycolor = result;
+
+    var gallery = '';
+    gallery = result.solid.backgroundCSS;
+    gallery = gallery.replace("background:", "");
+    document.getElementById("gallerytextColor").style.background = gallery;
+    save();
+  });
+};
+
+
+
 
 function changering() {
   var i = 0;
@@ -235,7 +297,26 @@ function load() {
       coloredbar = obj.data.backgroundcolor;
       mylogo = obj.data.logo;
       mybg = obj.data.imagebg;
+      titleColor = obj.data.titleColor;
+      gallerycolor = obj.data.gallerycolor;
+
+      if (titleColor && titleColor.solid && titleColor.solid.backgroundCSS) {
+        var _titleColor = '';
+        _titleColor = titleColor.solid.backgroundCSS;
+        _titleColor = _titleColor.replace("background:", "");
+        document.getElementById('headerColor').style.background = _titleColor;
+      }
+
+      if (gallerycolor && gallerycolor.solid && gallerycolor.solid.backgroundCSS) {
+        var _gallerycolor = '';
+        _gallerycolor = gallerycolor.solid.backgroundCSS;
+        _gallerycolor = _gallerycolor.replace("background:", "");
+        document.getElementById('gallerytextColor').style.background = _gallerycolor;
+      }
+
       document.getElementById('chkSwitchLogo').checked = obj.data.showLogo;
+      document.getElementById('chkSwitchbg').checked = obj.data.showbg;
+      document.getElementById('chkSwitchtextColor').checked = obj.data.showtextcolor;
       document.getElementById('chkSwitchRings').checked = obj.data.showRings;
       document.getElementById('transparent').checked = obj.data.showopacity;
       document.querySelector("#number").value = obj.data.opacitynumber;
@@ -246,10 +327,22 @@ function load() {
       } else {
         document.getElementById('ringArea').style.display = "none";
       }
+      if (obj.data.showbg) {
+        document.getElementById("image_holder3").style.display = '';
+      } else {
+        document.getElementById("image_holder3").style.display = "none";
+      }
       if (obj.data.showLogo) {
         document.getElementById('image_holder').style.display = '';
       } else {
         document.getElementById('image_holder').style.display = 'none';
+      }
+      if (obj.data.showtextcolor) {
+        document.getElementById('textArea').style.display = '';
+        document.getElementById('galleryArea').style.display = '';
+      } else {
+        document.getElementById('textArea').style.display = 'none';
+        document.getElementById('galleryArea').style.display = 'none';
       }
 
       if (mybg) {
@@ -375,6 +468,21 @@ function autosave() {
   document.getElementById("slogan").oninput = function () {
     save();
   };
+
+  document.getElementById('chkSwitchbg').oninput = function () {
+    var valuebg = document.getElementById('chkSwitchbg').checked;
+
+    function viewbg() {
+      if (valuebg) {
+        document.getElementById('image_holder3').style.display = '';
+      } else {
+        document.getElementById('image_holder3').style.display = 'none';
+      }
+    }
+    viewbg();
+    save();
+  };
+
   document.getElementById('chkSwitchLogo').oninput = function () {
     var value = document.getElementById('chkSwitchLogo').checked;
 
@@ -386,6 +494,22 @@ function autosave() {
       }
     }
     viewlogo();
+    save();
+  };
+
+  document.getElementById('chkSwitchtextColor').oninput = function () {
+    var valuetext = document.getElementById('chkSwitchtextColor').checked;
+
+    function viewtextcolor() {
+      if (valuetext) {
+        document.getElementById('textArea').style.display = '';
+        document.getElementById('galleryArea').style.display = '';
+      } else {
+        document.getElementById('textArea').style.display = 'none';
+        document.getElementById('galleryArea').style.display = 'none';
+      }
+    }
+    viewtextcolor();
     save();
   };
 
@@ -417,7 +541,7 @@ function autosavecarousel() {
     save(editor.items);
     var alllinks = document.querySelectorAll("#carouselImages .d-item a");
     for (var i = items.length - 1; i > -1; i--) {
-      alllinks[i+(alllinks.length-items.length)].click();
+      alllinks[i + (alllinks.length - items.length)].click();
     }
   };
   // this method will be called when an item deleted from the list

@@ -140,7 +140,7 @@ function updateNameSloganWelcome(data) {
 function changebackground(data) {
   var backgroundCSS = '';
 
-  if (!data.backgroundcolor) {
+  if (!data.backgroundcolor || !data.showbg) {
     if (defaultBackground) {
       document.getElementsByClassName('coloredbar')[0].style.background = defaultBackground;
       return;
@@ -193,7 +193,7 @@ function loadImages(data) {
 
         ele.innerHTML = '<img src="' + buildfire.imageLib.resizeImage(currentImage.iconUrl, {
           width: 'full'
-        }) + '" alt="' + currentImage.title + '"><div class="overlay"></div><h1 class="text">' + currentImage.title + '</h1>';
+        }) + '" alt="' + currentImage.title + '"><div class="overlay"></div><h1 class="text gallerytext">' + currentImage.title + '</h1>';
 
       };
       _image.src = buildfire.imageLib.resizeImage(currentImage.iconUrl, {
@@ -312,6 +312,25 @@ function showRings(data) {
   }
 }
 
+function myawesomegallerytext(data) {
+  var classColor = '';
+  if (data && data.gallerycolor && data.gallerycolor.solid && data.gallerycolor.solid.color && data.showtextcolor) {
+    classColor = '.gallerytext{ color:' + data.gallerycolor.solid.color + ' !important; }';
+  }
+    document.getElementById('customStylegallery').innerHTML = classColor;
+  
+
+}
+
+function myawesometext(data) {
+  var titleColor ='';
+  if (data && data.titleColor && data.titleColor.solid && data.showtextcolor) {
+    titleColor = '.customtitle{ color:' + data.titleColor.solid.color + ' !important; }';
+  }
+    document.getElementById('customStyleheader').innerHTML = titleColor;
+  
+}
+
 function changecolors(data) {
   if (!data || !data.colors || data.colors.length < 0) {
     return;
@@ -373,7 +392,7 @@ function changecolors(data) {
 }
 
 function uploadbacksplash(data) {
-  if (!data || !data.imagebg) {
+  if (!data || !data.imagebg || !data.showbg) {
     document.getElementById("imagebg").src = '';
     document.getElementById("imagebg").style.display = 'none';
     return;
@@ -384,7 +403,7 @@ function uploadbacksplash(data) {
     var options = {
       width: window.innerWidth,
       height: window.innerHeight
-    }
+    };
     document.getElementById("imagebg").src = buildfire.imageLib.cropImage(data.imagebg, options);
   };
   _image.src = buildfire.imageLib.cropImage(data.imagebg, {
@@ -455,6 +474,8 @@ buildfire.datastore.onUpdate(function (obj) {
     showRings(obj.data);
     deactivateMenu();
     updateNameSloganWelcome(obj.data);
+    myawesomegallerytext(obj.data);
+    myawesometext(obj.data);
   }
 });
 
@@ -473,6 +494,8 @@ buildfire.appearance.getAppTheme(function (err, result) {
       opacitybg(obj.data);
       changebackground(obj.data);
       showRings(obj.data);
+      myawesomegallerytext(obj.data);
+      myawesometext(obj.data);
     }
   });
 });

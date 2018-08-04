@@ -1,8 +1,8 @@
 {
   "author":"Peter Azmy",
   "pluginName": "Cascade Gallery",
-  "pluginDescription": "This plugin displays an image or logo surrounded by 5 customizable rings, followed by a smooth transition into a tailored gallery that will easily impress alone, or amplified with any other plugin used.",
-  "supportEmail":"support@buildfire.com",
+  "pluginDescription": "This plugin displays an image or logo surrounded by 5 customizable rings, followed by a smooth transition into a tailored gallery that will easily impress alone, or amplified with any other plugin used. Preview of the Plugin: https://youtu.be/OOXu-CLqdNk",
+  "supportEmail":"peterazmy8991@gmail.com",
   "control": {
     "content":{
       "enabled":true

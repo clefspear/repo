@@ -38,6 +38,28 @@
     <input text="text" class="form-control" id="slogan" placeholder="Enter Text Here">
     </br>
     </br>
+    </br>
+    <p for="textColor">Text Color</p>
+    <label class="switch" style="margin-top: -36px;">
+      <input id="chkSwitchtextColor" type="checkbox" checked>
+      <span class="slider round"></span>
+    </label>
+    <hr class="margin-top-ten margin-bottom-ten">
+    <div class="textArea" id="textArea">
+      <span id="deletekeyhdr" class="glyphicon glyphicon-remove btn-sm btn-danger" style="cursor: pointer; position: relative; border-radius: 50%; padding: 5px; top: 17px; left: -37px;"></span>
+      <div class="headerimageholder" id="headerimageholder" style="float:left;">Header & Subheader</div>
+      <div id="headerColor" style="cursor: pointer; border: 1px solid black; width:40px; height: 40px; border-radius: 50%; margin-left: 23px;">
+      </div>
+    </div>
+    <div class="galleryArea" id="galleryArea" style="margin-left: 140px; margin-top: -87px;">
+      <span id="deletekeyglry" class="glyphicon glyphicon-remove btn-sm btn-danger" style="cursor: pointer; position: relative; border-radius: 50%; padding: 5px;"></span>
+      <div class="galleryimageholder" id="galleryimageholder">Gallery Menu</div>
+      <div id="gallerytextColor" style="cursor: pointer; border: 1px solid black; width:40px; height: 40px; border-radius: 50%; margin-top: 9px; margin-left: 11px;">
+      </div>
+    </div>
+    </br>
+    </br>
+    </br>
     <p for="logo">Upload Image</p>
     <label class="switch" style="margin-top: -36px;">
       <input id="chkSwitchLogo" type="checkbox" checked>
@@ -51,24 +73,33 @@
         <img id="logobox_img" src="" style="width: 150px; height: 150px;border-radius: 50%;">
       </div>
     </div>
+    </br>
+    </br>
+    </br>
     <p for='backgroundcolor'>Screen Background</p>
+    <label class="switch" style="margin-top: -36px;">
+      <input id="chkSwitchbg" type="checkbox" checked>
+      <span class="slider round"></span>
+    </label>
     <hr class="margin-top-ten margin-bottom-ten">
-    <div class="image_holder2" style="width: 12%; height: 100%;">
-      <span id="deletekeybg" class="glyphicon glyphicon-remove btn-sm btn-danger" style="cursor: pointer; position: relative; border-radius: 50%; padding: 5px;"></span>
-      <div id="dvShowSelectedColorBar" style="cursor: pointer; border: 1px solid black; width: 50px; height: 50px; border-radius: 50%; margin-left: 6px; margin-top: 25px;"></div>
-    </div>
-    <div style="margin-left: 69px; margin-top: -65px;">
-      <div class="screens col-md-3 clearfix">
-        <div class="screen wideicon pull-left text-center" style="width: 100%;line-height: normal;height: 100%">
-          <a id="backgroundupload" class="border-radius-three default-background-hover" style="width: 80px">
-            <span class="add-icon">+</span>
-            <img id="backgroundscreen" class="" src=""> </a>
-          <span id="deletekeybackground" class="icon btn-delete-icon btn-danger transition-third" style="top: -24px;"></span>
-          <div class="range">
-            <input id="range" class="opacityslider" type="range" step="1" min="0" max="100" value="100">
-            <div class="input-group sliderp">
-              <input type="number" id="number" class="form-control slidernumber" min="0" max="100" size="3" value="100">
-              <span class="input-group-addon" id="basic-addon2">%</span>
+    <div class="image_holder3" id="image_holder3">
+      <div class="image_holder2" id="image_holder2" style="width: 12%; height: 100%;">
+        <span id="deletekeybg" class="glyphicon glyphicon-remove btn-sm btn-danger" style="cursor: pointer; position: relative; border-radius: 50%; padding: 5px;"></span>
+        <div id="dvShowSelectedColorBar" style="cursor: pointer; border: 1px solid black; width: 50px; height: 50px; border-radius: 50%; margin-left: 6px; margin-top: 25px;"></div>
+      </div>
+      <div style="margin-left: 69px; margin-top: -65px;">
+        <div class="screens col-md-3 clearfix">
+          <div class="screen wideicon pull-left text-center" style="width: 100%;line-height: normal;height: 100%">
+            <a id="backgroundupload" class="border-radius-three default-background-hover" style="width: 80px">
+              <span class="add-icon">+</span>
+              <img id="backgroundscreen" class="" src=""> </a>
+            <span id="deletekeybackground" class="icon btn-delete-icon btn-danger transition-third" style="top: -24px;"></span>
+            <div class="range">
+              <input id="range" class="opacityslider" type="range" step="1" min="0" max="100" value="100">
+              <div class="input-group sliderp">
+                <input type="number" id="number" class="form-control slidernumber" min="0" max="100" size="3" value="100">
+                <span class="input-group-addon" id="basic-addon2">%</span>
+              </div>
             </div>
           </div>
         </div>
@@ -76,9 +107,12 @@
     </div>
   </div>
   </div>
+  </br>
+  </br>
+  </br>
   <p for="colors">Rings</p>
-  <hr class="margin-top-ten margin-bottom-ten" style="margin-top: 11px !important;">
-  <label class="switch" style="margin-top: -51px;">
+  <hr class="margin-top-ten margin-bottom-ten" style="margin-top: 10px !important;">
+  <label class="switch" style="margin-top: -47px;">
     <input id="chkSwitchRings" type="checkbox" checked>
     <span class="slider round"></span>
   </label>
